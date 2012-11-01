@@ -1,19 +1,18 @@
 <h1>This is the game page</h1>
-<div class="content">
-    This is the content.
+<div class="content"><h1>
+    This is the content.</h1>
 </div>
 <div class="row">
-  <div id="sidebar" class="span3 offset9"></div>
-  <div id="content" class="span9">
-      <div class="row-fluid">
-        <div class="tile-box left span6">
-        </div>
-        <div class="tile-box right span6">
-        </div>
-    </div>
+  <div id="tile-box" class="span12">
+  </div>
 </div>
 <script id="textTileTpl" type="text/template">
-<div class="tile"></div>
+  <div class="text-tile">
+    <div class="tile-content">
+      <p id="first-name">{{firstName}}</p>
+      <p id="last-name">{{lastName}}</p>
+    </div>
+  </div>
 </script>
 
 <script id="rowTpl" type="text/template">

@@ -1,10 +1,30 @@
 @import "bootstrap";
 
-.tile {
-  width: 68px;
-  height: 68px;
+.text-tile {
+  width: 82px;
+  height: 82px;
   background-color: #1616f4;
   float:left;
+  padding: 5px;
+  p {
+    margin: 0; 
+    &:first-letter {
+      font-size: 1.2em;
+      padding-right: 1px;
+    }
+  }
+  #first-name {
+    color: white;
+    font-size: larger;
+
+  }
+  #last-name {
+    color: white;
+  }
+  .tile-content {
+    padding: 20% 0;
+    overflow: hidden;
+  }
 }
 
 .tile-box {
