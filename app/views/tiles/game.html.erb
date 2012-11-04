@@ -6,8 +6,9 @@
   <div id="tile-box" class="span12">
   </div>
 </div>
+
 <script id="textTileTpl" type="text/template">
-  <div class="text-tile">
+  <div class="tile text-tile" data-id="{{id}}">
     <div class="tile-content">
       <p id="first-name">{{firstName}}</p>
       <p id="last-name">{{lastName}}</p>
@@ -15,6 +16,13 @@
   </div>
 </script>
 
-<script id="rowTpl" type="text/template">
-<div class="row-fluid"></div>
+<script id="imgTileTpl" type="text/template">
+  <div class="tile img-tile" data-id="{{id}}">
+    <img src="{{pictureUrl}}">
+  </div>
 </script>
+
+<script id="rowTpl" type="text/template">
+  <div class="row-fluid"></div>
+</script>
+

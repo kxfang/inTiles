@@ -16,10 +16,16 @@ class MainController < ApplicationController
   end
 
   def li_connections
+    count = Integer(params[:count])
     json_response = li_oauth_access_token.get("/v1/people/~/connections", 'x-li-format' => 'json').body
-    connections_with_pictures = JSON.parse(json_response)["values"].select {|connection| connection.has_key?("pictureUrl")}[0..53]
-    logger.info connections_with_pictures.length
-    render :json => Hash[:connections => connections_with_pictures]
+    connections = JSON.parse(json_response)["values"].select {|connection| connection.has_key?("pictureUrl")}.shuffle[0..count-1]
+    names = Array.new
+    pics = Array.new
+    connections.each {|connection| 
+      names.push(id: connection["id"], firstName: connection["firstName"], lastName: connection["lastName"])
+      pics.push(id: connection["id"], pictureUrl: connection["pictureUrl"]) 
+       }
+    render :json => { names: names.shuffle, pictures: pics }
   end
 
 end

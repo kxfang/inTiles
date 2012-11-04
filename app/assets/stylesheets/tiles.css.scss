@@ -1,11 +1,20 @@
 @import "bootstrap";
 
-.text-tile {
-  width: 82px;
-  height: 82px;
-  background-color: #1616f4;
+.tile {
+  width: 92px;
+  height: 92px;
   float:left;
-  padding: 5px;
+}
+
+.img-tile {
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.text-tile {
+  background-color: #1616f4;
   p {
     margin: 0; 
     &:first-letter {
@@ -22,7 +31,7 @@
     color: white;
   }
   .tile-content {
-    padding: 20% 0;
+    padding: 20% 5px;
     overflow: hidden;
   }
 }
