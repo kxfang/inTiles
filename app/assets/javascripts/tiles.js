@@ -23,23 +23,29 @@ $(document).ready(function() {
         var isText = Math.floor((Math.random()*10)+1)%2 == 0;
         var tileContent;
         var total = rows * cols;
+        
+        var tile;
                 
         if ((isText && text_index < data.names.length) || pic_index == data.pictures.length) {
           tileContent = Mustache.render($('#textTileTpl').html(), data.names[text_index]);
+          tile = $(Mustache.render($('#tileTpl').html(), data.names[text_index]));
           text_index++;
         }
         else {
           tileContent = Mustache.render($('#imgTileTpl').html(), data.pictures[pic_index]);
+          tile = $(Mustache.render($('#tileTpl').html(), data.pictures[pic_index]));
           pic_index++;
         }
-        var tile = $('' + $('#tileTpl').html());
         tile.find('.back').append(tileContent);
         row.append(tile);
       }
     }
     
-    $('.tile').click(function(e) {
-    //flip clickedArray[0]
+    $('.tile').click(onClick);
+    
+    function onClick(e) {
+      console.log("clicked: " + $(this).data('id'));
+      
       clickedArray = clickedArray.slice(1, 2);
       clickedArray.push($(this));
       if (!(clickedArray[0] == null || clickedArray[1] == null) && 
@@ -48,10 +54,9 @@ $(document).ready(function() {
         console.log("ELIMINATE: " + clickedArray[0].data("id"));
         clickedArray = [null, null];
       }
-/*       console.log(clickedArray); */
-    });
+      
+      $(this).toggleClass('flipped');
+    }
   }
 });
-
-
 
