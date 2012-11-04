@@ -21,17 +21,19 @@ $(document).ready(function() {
       var row = $('' + $('#rowTpl').html()).appendTo(tilesDiv);
       for (var c = 0; c < cols; c++) {
         var isText = Math.floor((Math.random()*10)+1)%2 == 0;
-        var tile;
+        var tileContent;
         var total = rows * cols;
                 
         if ((isText && text_index < data.names.length) || pic_index == data.pictures.length) {
-          tile = Mustache.render($('#textTileTpl').html(), data.names[text_index]);
+          tileContent = Mustache.render($('#textTileTpl').html(), data.names[text_index]);
           text_index++;
         }
         else {
-          tile = Mustache.render($('#imgTileTpl').html(), data.pictures[pic_index]);
+          tileContent = Mustache.render($('#imgTileTpl').html(), data.pictures[pic_index]);
           pic_index++;
         }
+        var tile = $('' + $('#tileTpl').html());
+        tile.find('.back').append(tileContent);
         row.append(tile);
       }
     }

@@ -7,8 +7,16 @@
   </div>
 </div>
 
+<script id="tileTpl" type="text/template">
+  <div class="tile" data-id="{{id}}">
+    <div class="front"></div>
+    <div class="back fill-parent">
+    </div>
+  </div>
+</script>
+
 <script id="textTileTpl" type="text/template">
-  <div class="tile text-tile" data-id="{{id}}">
+  <div class="text-tile fill-parent">
     <div class="tile-content">
       <p id="first-name">{{firstName}}</p>
       <p id="last-name">{{lastName}}</p>
@@ -17,7 +25,7 @@
 </script>
 
 <script id="imgTileTpl" type="text/template">
-  <div class="tile img-tile" data-id="{{id}}">
+  <div class="img-tile">
     <img src="{{pictureUrl}}">
   </div>
 </script>
