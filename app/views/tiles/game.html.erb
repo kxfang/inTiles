@@ -7,10 +7,20 @@
   </div>
 </div>
 
+<div id="loading-modal" class="modal hide fade" data-backdrop="static" data-keyboard="false">
+  <div class="modal-header">
+    <h3>Loading your connections...</h3>
+  </div>
+  <div class="modal-body">
+    <p>Downloading your connections from LinkedIn. This may take a while...</p>
+    <img id="modal-img" src="http://blog.hubspot.com/Portals/249/images/linkedin_logo.jpg">
+  </div>
+</div>
+
 <script id="tileTpl" type="text/template">
-  <div class="tile flip-container flipped" data-id="{{id}}">
+  <div class="tile flip-container" data-id="{{id}}">
     <div class="front">
-      <img src="http://www.calfinder.com/blog/wp-content/uploads/2009/10/kitchen-flooring-grey-tile.jpg">
+      <img class="fill-parent" src="http://www.calfinder.com/blog/wp-content/uploads/2009/10/kitchen-flooring-grey-tile.jpg">
     </div>
     <div class="back fill-parent">
     </div>
@@ -28,7 +38,7 @@
 
 <script id="imgTileTpl" type="text/template">
   <div class="img-tile">
-    <img src="{{pictureUrl}}">
+    <img class="connection-img" src="{{pictureUrl}}">
   </div>
 </script>
 

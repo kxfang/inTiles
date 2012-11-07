@@ -1,12 +1,16 @@
 $(document).ready(function() {
 
-  var rows = 6;
+  var rows = 5;
   var cols = 9;
   
-  var clickedArray = [null, null];
+  var clickedArray = [];
+  var timedFlips = [];
+  
+  showLoadingModal();
 
   $.getJSON("/api/li-connections?count=27", function(json) {
     $(".content").html("content loaded");
+    hideLoadingModal();
     generateTiles(json);
   });
   
@@ -44,19 +48,59 @@ $(document).ready(function() {
     $('.tile').click(onClick);
     
     function onClick(e) {
-      console.log("clicked: " + $(this).data('id'));
       
-      clickedArray = clickedArray.slice(1, 2);
-      clickedArray.push($(this));
+      if (!$(this).hasClass('flipped')) {
+        console.log("clicked: " + $(this).data('id'));
+      
+        $(this).addClass('flipped');
+        console.log($(this).attr('class'));
+        clickedArray.push($(this));
+        timedFlips.push(setTimeout(unflipAndShift, 2000));
+        if (clickedArray.length > 2) {
+          unflipAndShift();
+        }
+        
+        if (clickedArray.length == 2 && clickedArray[0].data('id') == clickedArray[1].data('id')) {
+          match();
+        }
+      }
+/*
       if (!(clickedArray[0] == null || clickedArray[1] == null) && 
         clickedArray[0].data("id") == clickedArray[1].data("id") &&
         clickedArray[0].prop("class") != clickedArray[1].prop("class")) {
         console.log("ELIMINATE: " + clickedArray[0].data("id"));
         clickedArray = [null, null];
       }
+*/
       
-      $(this).toggleClass('flipped');
     }
+    
+    function unflipAndShift() {
+      console.log('unflipping');
+      var tile = clickedArray.shift();
+      tile.removeClass('flipped');
+      
+      var timedFlip = timedFlips.shift();
+      clearTimeout(timedFlip);
+    }
+    
+    function match() {
+      clickedArray = [];
+      clearTimeout(timedFlips[0]);
+      clearTimeout(timedFlips[1]);
+      timedFlips = [];
+    }
+    
+  }
+  
+  function showLoadingModal() {      
+    $('#loading-modal').modal('show');
+  }
+  
+  function hideLoadingModal() {
+    $('#loading-modal').modal('hide');
   }
 });
+
+
 
