@@ -1,9 +1,15 @@
-<h1>This is the game page</h1>
-<div class="content"><h1>
-    This is the content.</h1>
-</div>
-<div class="row">
-  <div id="tile-box" class="span12">
+<%= content_for(:head) do %>
+<%= javascript_include_tag "tiles" %>
+<% end %>
+
+<div class="page-content">
+  <h1>This is the game page</h1>
+  <div class="content"><h1>
+      This is the content.</h1>
+  </div>
+  <div class="row">
+    <div id="tile-box" class="span10">
+    </div>
   </div>
 </div>
 
@@ -19,17 +25,19 @@
 
 <script id="tileTpl" type="text/template">
   <div class="tile flip-container" data-id="{{id}}">
-    <div class="front">
-      <img class="fill-parent" src="http://www.calfinder.com/blog/wp-content/uploads/2009/10/kitchen-flooring-grey-tile.jpg">
-    </div>
-    <div class="back fill-parent">
+    <div class="tile-content">
+      <div class="front">
+        <img class="fill-parent" src="http://nextlevelforyou.com/wp-content/uploads/2012/02/linkedin-logo-webtreatsetc.png">
+      </div>
+      <div class="back fill-parent">
+      </div>
     </div>
   </div>
 </script>
 
 <script id="textTileTpl" type="text/template">
   <div class="text-tile fill-parent">
-    <div class="tile-content">
+    <div class="text-tile-content">
       <p id="first-name">{{firstName}}</p>
       <p id="last-name">{{lastName}}</p>
     </div>

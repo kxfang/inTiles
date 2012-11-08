@@ -4,6 +4,14 @@ body {
   -moz-user-select: none;
   -webkit-user-select: none;
   padding: 60px;
+  background-image: url('http://illusionapparel.com/wp-content/uploads/2011/04/Grey-website-background.jpg');
+}
+
+.page-content {
+  border-radius: 5px;
+  background-color: #eee;
+  padding: 20px;
+  margin-bottom: 30px;
 }
 
 .fill-parent, .connection-img {
@@ -30,17 +38,27 @@ body {
   transform-style: preserve-3d;
 }
 
-  .flipped {
-    -webkit-transform: rotateY(180deg);
-    -moz-transform: rotateY(180deg);
-    -o-transform: rotateY(180deg);
-    transform: rotateY(180deg);
-  }
+.flipped {
+  -webkit-transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg);
+  -o-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+}
 
 .tile {
-  width: 92px;
-  height: 92px;
+  width: 94px;
+  height: 94px;
   float:left;
+  position: relative;
+  z-index: 1;
+  
+  border-style: solid;
+  border-width: 1px;
+  border-color: #333;
+  
+  &:hover {
+    z-index: 3;
+  }
 }
 
 .front, .back {
@@ -56,6 +74,17 @@ body {
 
 .front {
   z-index: 2;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    -moz-box-shadow: 0 0 12px #4875B4;
+    -webkit-box-shadow: 0 0 12px #4875B4;
+    -o-box-shadow: 0 0 12px #4875B4;
+    box-shadow: 0px 0px 12px #4875B4;
+  }
 }
 
 /* back, initially hidden pane */
@@ -94,14 +123,10 @@ body {
   #last-name {
     color: white;
   }
-  .tile-content {
+  .text-tile-content {
     padding: 20% 5px;
     overflow: hidden;
   }
-}
-
-.tile-box {
-  background-color: yellow;
 }
 
 #modal-img {

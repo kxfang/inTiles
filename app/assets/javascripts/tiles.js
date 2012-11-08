@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
   var rows = 5;
-  var cols = 9;
+  var cols = 8;
   
   var clickedArray = [];
   var timedFlips = [];
@@ -85,6 +85,16 @@ $(document).ready(function() {
     }
     
     function match() {
+    
+      function hideTiles() {
+        tilesToHide[0].css('border-color', '#333').find('.back').fadeOut(1000);
+        tilesToHide[1].css('border-color', '#333').find('.back').fadeOut(1000).css('border-width', '0');
+      }
+      var tilesToHide = clickedArray;
+      clickedArray[0].css('border-color', '#fff');
+      clickedArray[1].css('border-color', '#fff');
+      setTimeout(hideTiles, 500);
+      
       clickedArray = [];
       clearTimeout(timedFlips[0]);
       clearTimeout(timedFlips[1]);
