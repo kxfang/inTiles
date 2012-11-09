@@ -7,11 +7,19 @@ body {
   background-image: url('http://illusionapparel.com/wp-content/uploads/2011/04/Grey-website-background.jpg');
 }
 
+.container {
+  width: 990px;
+}
+
 .page-content {
   border-radius: 5px;
   background-color: #eee;
-  padding: 20px;
+  width: 990px;
   margin-bottom: 30px;
+}
+
+.page-section {
+  padding: 25px;
 }
 
 .fill-parent, .connection-img {
@@ -45,16 +53,25 @@ body {
   transform: rotateY(180deg);
 }
 
+#tile-box {
+  border-color: #ddd;
+  border-style: solid;
+  border-width: 1px 0px;
+  background-position: center;
+}
+
 .tile {
-  width: 94px;
-  height: 94px;
+  width: 99px;
+  height: 99px;
   float:left;
   position: relative;
   z-index: 1;
   
+/*
   border-style: solid;
   border-width: 1px;
   border-color: #333;
+*/
   
   &:hover {
     z-index: 3;

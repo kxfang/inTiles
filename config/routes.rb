@@ -7,6 +7,7 @@ InTiles::Application.routes.draw do
   match '/auth/:provider/callback' => 'sessions#create'
   match '/auth/failure' => 'main#auth_failure'
   match '/api/li-connections' => 'main#li_connections'
+  match '/api/bg-image-url' => 'main#background_image_url'
 
   match '/tiles/game' => 'tiles#game'
   # The priority is based upon order of creation:

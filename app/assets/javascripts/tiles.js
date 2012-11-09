@@ -1,14 +1,19 @@
 $(document).ready(function() {
 
   var rows = 5;
-  var cols = 8;
+  var cols = 10;
   
   var clickedArray = [];
   var timedFlips = [];
   
   showLoadingModal();
+  
+  $.getJSON("/api/bg-image-url", function(json) {
+    $('#tile-box').css('background-image', 'url(' + json.image + ')');
+    console.log($("#tile-box"));
+  });
 
-  $.getJSON("/api/li-connections?count=27", function(json) {
+  $.getJSON("/api/li-connections?count=" + rows * cols / 2, function(json) {
     $(".content").html("content loaded");
     hideLoadingModal();
     generateTiles(json);
@@ -87,12 +92,10 @@ $(document).ready(function() {
     function match() {
     
       function hideTiles() {
-        tilesToHide[0].css('border-color', '#333').find('.back').fadeOut(1000);
-        tilesToHide[1].css('border-color', '#333').find('.back').fadeOut(1000).css('border-width', '0');
+        tilesToHide[0].find('.back').fadeOut(1000);
+        tilesToHide[1].find('.back').fadeOut(1000);
       }
       var tilesToHide = clickedArray;
-      clickedArray[0].css('border-color', '#fff');
-      clickedArray[1].css('border-color', '#fff');
       setTimeout(hideTiles, 500);
       
       clickedArray = [];

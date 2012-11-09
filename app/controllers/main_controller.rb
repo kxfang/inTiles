@@ -1,4 +1,6 @@
 require 'json'
+require 'nokogiri'
+require 'open-uri'
 
 class MainController < ApplicationController
 
@@ -26,6 +28,15 @@ class MainController < ApplicationController
       pics.push(id: connection["id"], pictureUrl: connection["pictureUrl"]) 
        }
     render :json => { names: names.shuffle, pictures: pics }
+  end
+  
+  def background_image_url
+    doc = Nokogiri::HTML(open('http://photography.nationalgeographic.com/photography/photo-of-the-day'))
+    foo = nil
+    doc.css('div.primary_photo a img').each do |img_tag|
+     url = img_tag.attr('src')
+     render :json => { image: url }
+    end
   end
 
 end

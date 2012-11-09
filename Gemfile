@@ -9,6 +9,7 @@ gem 'sqlite3'
 
 gem 'omniauth'
 gem 'omniauth-linkedin'
+gem 'nokogiri'
 
 # Gems used only for assets and not required
 # in production environments by default.
