@@ -4,22 +4,35 @@
 
 <div class="page-content">
   <div class="page-section section-top">
-  <h1>This is the game</h1>
+    <div class="slide-panel">
+      <div class="slider">
+        <div id="panel1">
+          <h5>Time taken: <strong id="time">0</strong> seconds</h5>
+        </div>
+        <div id="panel2">
+          <h5 id="result">Your time was <strong id="time-result"></strong> seconds</h5>
+          <button id="restart-btn" class="btn btn-primary btn-large">Play Again</button>
+        </div>
+      </div>
+    </div>
   </div>
   <div id="tile-box">
   </div>
   <div class="page-section section-bottom">
-  <p>Images taken from <a href="http://photography.nationalgeographic.com/photography/photo-of-the-day">National Geographic Photo of the Day</a></p>
+  <p>"<strong id="bg-name"></strong>", from <a href="http://photography.nationalgeographic.com/photography/photo-of-the-day">National Geographic Photo of the Day</a></p>
   </div>
 </div>
 
 <div id="loading-modal" class="modal hide fade" data-backdrop="static" data-keyboard="false">
-  <div class="modal-header">
+  <div id="loading-header" class="modal-header">
     <h3>Loading your connections...</h3>
   </div>
-  <div class="modal-body">
+  <div id="loading-body" class="modal-body">
     <p>Downloading your connections from LinkedIn. This may take a while...</p>
     <img id="modal-img" src="http://blog.hubspot.com/Portals/249/images/linkedin_logo.jpg">
+  </div>
+  <div class="modal-footer">
+    <button id="start-button" class="btn btn-primary btn-large" type="button" disabled="disabled">Play</button>
   </div>
 </div>
 
@@ -27,7 +40,7 @@
   <div class="tile flip-container" data-id="{{id}}">
     <div class="tile-content">
       <div class="front">
-        <img class="fill-parent" src="http://design-4-lessblog.com/wp-content/uploads/2012/04/Marble-Tile-2.jpg">
+        <img class="fill-parent" src="<%= asset_path 'in_tile.png' %>">
       </div>
       <div class="back fill-parent">
       </div>

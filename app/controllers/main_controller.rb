@@ -32,11 +32,17 @@ class MainController < ApplicationController
   
   def background_image_url
     doc = Nokogiri::HTML(open('http://photography.nationalgeographic.com/photography/photo-of-the-day'))
-    foo = nil
+    url = nil
+    img_name = nil
     doc.css('div.primary_photo a img').each do |img_tag|
-     url = img_tag.attr('src')
-     render :json => { image: url }
+      url = img_tag.attr('src')
     end
+    
+    doc.css('#page_head h1').each do |h1_tag|
+      img_name = h1_tag.content 
+    end   
+    render :json => { image: url, name: img_name }
+
   end
 
 end

@@ -6,18 +6,39 @@ $(document).ready(function() {
   var clickedArray = [];
   var timedFlips = [];
   
-  showLoadingModal();
+  var time = 0;
+  var timeTicker;
   
-  $.getJSON("/api/bg-image-url", function(json) {
-    $('#tile-box').css('background-image', 'url(' + json.image + ')');
-    console.log($("#tile-box"));
-  });
-
-  $.getJSON("/api/li-connections?count=" + rows * cols / 2, function(json) {
-    $(".content").html("content loaded");
-    hideLoadingModal();
-    generateTiles(json);
-  });
+  var completed = 0;
+  
+  $('#restart-btn').click(onRestart);
+  
+  startGame();
+  
+  function startGame() {  
+    showLoadingModal();
+    $.getJSON("/api/bg-image-url", function(json) {
+      $('#tile-box').css('background-image', 'url(' + json.image + ')');
+      $('#bg-name').html(json.name);
+      console.log($("#tile-box"));
+    });
+  
+    $.getJSON("/api/li-connections?count=" + rows * cols / 2, function(json) {
+      $('#loading-header h3').html("Press start to begin!");
+      $('#loading-body p').html("Done!");
+      $('#start-button').attr("disabled", false).click(onStartButton);
+      generateTiles(json);
+    });
+  }
+  
+  function resetState() {
+    completed = 0;
+    time = 0;
+    clickedArray = [];
+    timedFlips = [];
+    $('.tile').remove();
+    $('#start-button').attr("disabled", true);
+  }
   
   function generateTiles(data) {
     var tilesDiv = $('#tile-box');
@@ -68,16 +89,7 @@ $(document).ready(function() {
         if (clickedArray.length == 2 && clickedArray[0].data('id') == clickedArray[1].data('id')) {
           match();
         }
-      }
-/*
-      if (!(clickedArray[0] == null || clickedArray[1] == null) && 
-        clickedArray[0].data("id") == clickedArray[1].data("id") &&
-        clickedArray[0].prop("class") != clickedArray[1].prop("class")) {
-        console.log("ELIMINATE: " + clickedArray[0].data("id"));
-        clickedArray = [null, null];
-      }
-*/
-      
+      }      
     }
     
     function unflipAndShift() {
@@ -102,6 +114,12 @@ $(document).ready(function() {
       clearTimeout(timedFlips[0]);
       clearTimeout(timedFlips[1]);
       timedFlips = [];
+      
+      completed++;
+      
+      if (completed == rows * cols / 2) {
+        onComplete();
+      }
     }
     
   }
@@ -112,6 +130,42 @@ $(document).ready(function() {
   
   function hideLoadingModal() {
     $('#loading-modal').modal('hide');
+  }
+  
+  function onStartButton() {
+    hideLoadingModal();
+    showTiles();
+    tick();
+  }
+  
+  function tick() {
+    timeTicker = setTimeout(tick, 1000);
+    $('#time').html(time);
+    time++;
+  }
+  
+  function showTiles() {
+    $('.tile').css('opacity', 1.0);
+  }
+  
+  function onComplete() {
+    clearTimeout(timeTicker);
+    slidePanel();
+  }
+  
+  function onRestart() {
+    resetPanel();
+    resetState();
+    startGame();
+  }
+  
+  function slidePanel() {
+    $('.slider').animate({left: '-100%'}, 1000);
+    $('#time-result').html(time);
+  }
+  
+  function resetPanel() {
+    $('.slider').animate({left: '0%'}, 1000);
   }
 });
 
